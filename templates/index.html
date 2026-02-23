@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* ===== BACKGROUND ===== */
+
+body{
+    margin:0;
+    font-family: sans-serif ;
+    
+
+    background:url("/static/pollution.jpg") center/cover fixed;
+    color:rgb(18, 1, 1);
+    overflow:hidden;
+}
+
+
+/* ===== TOP NAVBAR ===== */
+
+.topbar{
+
+    margin:15px;
+    padding:12px 25px;
+    border-radius:70px;
+
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border:0px solid rgba(255,255,255,0.3);
+
+}
+.topbar::before{
+
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:rgba(255,255,255,0.3);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    /* LEFT strong blur → RIGHT fade */
+    
+
+    z-index:0;
+
+}
+.topbar *{
+    position:relative;
+    z-index:2;
+}
+
+.topbar h4{
+
+    font-weight:800;
+    font-size:30px;     /* makes bold */
+      /* spacing between letters */
+
+}
+
+.topbar-right {
+
+    font-size:22px;   /* control size */
+    font-weight:600;  /* make slightly bold */
+    letter-spacing:1px;  /* spacing between letters */
+
+}
+
+/* ===== MAIN LAYOUT ===== */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:240px 1fr;
+    gap:25px;
+    padding:20px;
+}
+
+/* ===== SIDEBAR ===== */
+/* ===== SIDEBAR CONTAINER ===== */
+
+.sidebar{
+
+    height:90vh;
+    padding:25px;
+    margin-top:-25px;
+
+    position:relative;
+    overflow:hidden;
+
+    border-radius:14px;
+    border:0px solid rgba(255,255,255,0);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.6),
+        inset 0 0 0 1px rgba(255,255,255,0.03);
+
+}
+
+
+/* ===== BLUR BACKGROUND LAYER (NOT AFFECT TEXT) ===== */
+
+.sidebar::before{
+
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:rgba(15,20,35,0.35);
+
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+
+    /* GRADIENT BLUR FADE */
+    mask-image:linear-gradient(
+        to bottom,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.8) 35%,
+        rgba(0,0,0,0) 65%,
+        rgba(0,0,0,0) 100%
+    );
+
+    -webkit-mask-image:linear-gradient(
+        to bottom,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.8) 35%,
+        rgba(0,0,0,0) 65%,
+        rgba(0,0,0,0) 100%
+    );
+
+    z-index:0;
+}
+
+
+/* ===== CONTENT ABOVE BLUR ===== */
+
+.sidebar *{
+    position:relative;
+    z-index:2;
+}
+
+
+/* ===== TITLE ===== */
+
+.sidebar h4{
+
+    color:white;
+    font-weight:600;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.5),
+        0 0 20px rgba(0,150,255,0.3);
+
+}
+
+
+/* ===== MENU ITEMS ===== */
+
+.sidebar p{
+
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+
+    color:#d1d5db;
+
+}
+
+.sidebar p:hover{
+
+    background:rgba(255,255,255,0.08);
+    transform:translateX(6px);
+
+}
+
+.sidebar p.active{
+
+    background:rgba(255,255,255,0.12);
+    color:white;
+
+}
+
+
+
+
+/* ===== MENU ITEMS ===== */
+
+.sidebar p{
+
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+    color:#d1d5db;
+    position:relative;
+    z-index:2; /* keep text above blur layer */
+
+}
+
+
+.sidebar p:hover{
+
+    background:rgba(255,255,255,0.08);
+    transform:translateX(5px);
+
+}
+
+
+.sidebar p.active{
+
+    background:rgba(255,255,255,0.12);
+    color:white;
+
+}
+
+/* ===== GLASS CARD ===== */
+
+.card-glass{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(2px);
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 8px 30px rgba(0,0,0,0.4);
+}
+.move-up{
+    position:relative;
+    top:-20px;
+}
+
+
+/* ===== INPUT ===== */
+
+input{
+    background:rgba(255,255,255,0.12)!important;
+    border:none!important;
+    color:white;
+}
+
+input::placeholder{
+    color:white;
+}
+.move-bottom-section{
+    position:relative;
+    top:-30px;   /* move UP */
+}
+.fixed-bottom-section{
+
+    position:fixed;
+    bottom:10px;      /* distance from bottom */
+    left:300px;       /* adjust according to sidebar width */
+    right:100px;
+
+    z-index:5;
+
+}
+
+.fixed-top-cards{
+
+    position:fixed;
+    top:120px;        /* below navbar */
+    left:300px;       /* adjust for sidebar width */
+    right:40px;
+
+    z-index:5;
+
+}
+
+.enter-card-control{
+
+    position:relative;
+
+    left:0px;   /* move RIGHT (+) / LEFT (-) */
+    top:-30px;   /* move UP (-) / DOWN (+) */
+
+    width:50%;   /* control SIZE */
+
+}
+.full-control-card{
+
+    height:100%;   /* auto match sibling height */
+
+    display:flex;
+    flex-direction:column;
+    right:-50px;
+
+}
+.result-control{
+
+    position:relative;
+    top:-29px;   /* move UP */
+    left:1px;
+    width: 550px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<!-- TOP NAVBAR -->
+
+<div class="topbar">
+    <h4>☁ smart aqi</h4>
+    <span class="topbar-right">
+    Analytics • Prediction • Insights
+</span>
+
+  
+    <div></div>
+</div>
+
+<div class="dashboard">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h5>🌫 AQI Dashboard</h5>
+<hr>
+
+<p class="active">📊 AQI Prediction</p>
+<p>📈 Model Comparison</p>
+<p>ℹ About</p>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div>
+
+<!-- TOP CARDS -->
+
+
+     <div class="row fixed-top-cards">
+
+
+<div class="col-md-7 enter-card-control">
+
+
+<div class="card-glass p-4">
+
+<h5>Enter Pollution Levels</h5>
+
+<form method="POST">
+
+<div class="row">
+
+{% for f in features %}
+
+<div class="col-md-4 mb-3">
+<input name="{{f}}" placeholder="{{f}}" class="form-control" required>
+</div>
+
+{% endfor %}
+
+</div>
+
+<button class="btn btn-primary">Predict AQI</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="col-md-5 result-control ">
+
+
+<div class="card-glass p-4 full-control-card">
+
+
+<h5>Prediction Result</h5>
+
+{% if prediction %}
+
+<h2>{{prediction}}</h2>
+
+<span class="badge bg-danger">{{category}}</span>
+
+<div class="mt-3" style="height:10px;border-radius:10px;background:
+linear-gradient(to right,#22c55e,#facc15,#f97316,#ef4444,#b91c1c);"></div>
+
+{% else %}
+
+<p>No prediction yet</p>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BOTTOM CARDS -->
+ <div class="row mt-4 align-items-stretch fixed-bottom-section">
+
+
+
+    <!-- FEATURE IMPORTANCE -->
+    <div class="col-md-6 d-flex">
+        <div class="card-glass p-3 w-100">
+            <h6>Feature Importance</h6>
+            <canvas id="featureChart"></canvas>
+        </div>
+    </div>
+
+    <!-- MODEL PERFORMANCE -->
+    <div class="col-md-6 d-flex">
+        <div class="card-glass p-3 w-100">
+            <div class="d-flex justify-content-between">
+                <h6>Model Performance Comparison</h6>
+                <button onclick="location.reload()" class="btn btn-sm btn-light">Reload</button>
+            </div>
+            <canvas id="modelChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const labels = JSON.parse('{{ chart_labels | tojson | safe }}');
+const values = JSON.parse('{{ chart_values | tojson | safe }}');
+
+new Chart(document.getElementById("modelChart"), {
+
+type:"bar",
+
+data:{
+labels:labels,
+datasets:[{
+data:values,
+backgroundColor:["#ffb833","#ff8533","#008080","#004d4d"],
+borderRadius:8
+}]
+},
+
+options:{
+plugins:{legend:{display:false}},
+scales:{
+x:{ticks:{color:"black"}},
+y:{ticks:{color:"black"}}
+}
+}
+
+});
+const featureLabels = JSON.parse('{{ feature_labels | tojson | safe }}');
+const featureValues = JSON.parse('{{ feature_values | tojson | safe }}');
+
+new Chart(document.getElementById("featureChart"), {
+
+type:"bar",
+
+data:{
+labels:featureLabels,
+datasets:[{
+data:featureValues,
+backgroundColor:"#06b6d4",
+borderRadius:8
+}]
+},
+
+options:{
+indexAxis:'y',
+plugins:{legend:{display:false}},
+scales:{
+x:{ticks:{color:"black"}},
+y:{ticks:{color:"black"}}
+}
+}
+
+});
+
+</script>
+
+</body>
+</html>
