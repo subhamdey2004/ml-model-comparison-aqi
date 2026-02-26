@@ -3,7 +3,6 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 
 def get_models():
-
     models = {
         "random_forest": RandomForestRegressor(),
         "gradient_boosting": GradientBoostingRegressor(),
