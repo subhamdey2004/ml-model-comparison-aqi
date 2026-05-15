@@ -1,6 +1,6 @@
-🌫 Comparative Analysis of Supervised Machine Learning Techniques for AQI Prediction .
+☁️Comparative Analysis of Supervised Machine Learning Techniques for AQI Prediction .
 
-Overview :-
+✪ Overview :-
 
 -> Air pollution is a critical environmental challenge affecting public health, climate systems, and urban sustainability. Accurate     prediction of the Air Quality Index (AQI) enables proactive decision-making and risk mitigation.
 
@@ -8,7 +8,7 @@ Overview :-
 
 -> The project demonstrates how machine learning can be applied to environmental data analytics and intelligent forecasting systems.
 
-Problem Statement :-
+✪ Problem Statement :-
 
 Traditional AQI monitoring systems primarily provide descriptive statistics rather than predictive insights. There is a need for:
 
@@ -18,7 +18,7 @@ Traditional AQI monitoring systems primarily provide descriptive statistics rath
 
 This project aims to address these challenges through predictive modeling and comparative analysis.
 
-Methodology :-
+✪ Methodology :-
 
 The workflow consists of the following stages:
 
@@ -41,7 +41,7 @@ The workflow consists of the following stages:
 5. Deployment
    - Flask-based interactive dashboard
 
-Dataset Features :-
+✪ Dataset Features :-
 
 The AQI prediction is based on pollutant concentration parameters:
 
@@ -55,24 +55,24 @@ The AQI prediction is based on pollutant concentration parameters:
 - SO2
 - O3
 
-Target Variable :-
+✪ Target Variable :-
 
 - AQI (Air Quality Index)
 
-Machine Learning Models Compared :-
+✪ Machine Learning Models Compared :-
 
 - Random Forest Regressor
 - Gradient Boosting Regressor
 - Linear Regression
 - Decision Tree Regressor
 
-Evaluation Metrics :-
+✪ Evaluation Metrics :-
 
 - Root Mean Squared Error (RMSE)
 - Model performance comparison
 - Feature importance analysis
 
-System Architecture :-
+✪ System Architecture :-
 
               Data Input
                  ↓
@@ -89,36 +89,32 @@ System Architecture :-
     Real-time AQI Prediction + Visualization
 
 
-Technology Stack :-
+✪ Technology Stack :-
 
-Frontend --
-
+✪ Frontend --
 - HTML
 - CSS (Glass UI Design)
 - Bootstrap
 - Chart.js
 
-Backend --
-
+✪ Backend --
 - Python
 - Flask
 - Pandas
 - Scikit-learn
 - Joblib
 
-Machine Learning :-
-
+✪ Machine Learning :-
 - Supervised Regression Algorithms
 
-Features :-
-
+✪ Features :-
 - Interactive AQI prediction dashboard
 - Comparative model analysis
 - Feature importance visualization
 - Real-time prediction interface
 - Modern glassmorphism UI design
 
-Installation & Setup :-
+✪ Installation & Setup :-
 
 To set up the project locally:
 
@@ -135,13 +131,13 @@ pip install requirements.txt
 # Run Application
 python app.py
 
-Results :-
+✪ Results :-
 
 -> The comparative analysis demonstrates differences in prediction accuracy among supervised learning techniques. Ensemble models such as Random Forest and Gradient Boosting show improved performance due to their ability to capture nonlinear relationships between pollutants and AQI.
 
 -> Feature importance analysis indicates that PM2.5 and PM10 are significant predictors of AQI levels.
 
-Future Improvements :-
+✪ Future Improvements :-
 
 - Deep learning model integration
 - Real-time AQI API data
@@ -149,14 +145,9 @@ Future Improvements :-
 - Time-series forecasting
 - Model explainability (SHAP/LIME)
 
-Developer :-
+✪ Developer :-
 
 Subham Dey
 Email- dey.subham200414@gmail.com
 
-License :-
-
-This project is licensed under the MIT License - see LICENSE file for details.
-
-
-
+✪ License :- This project is licensed under the MIT License - see LICENSE file for details.-
